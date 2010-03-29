@@ -220,7 +220,7 @@ local FILTER_BUFFS = {
 		{ id = 34471, priority = 2 }, -- The Beast Within
 		{ id = 45438, priority = 2 }, -- Ice Block
 		{ id = 642, priority = 2 }, -- Divine Shield
-		{ id = 50334, priority = 2 }, -- Berserk
+		{ forceId = 50334, priority = 2 }, -- Berserk
 	};
 
 local FILTER_TEST = {
