@@ -1,3 +1,5 @@
+local _, Internals = ...; 
+
 -- defines
 local TESTMODE = false;
 
@@ -225,10 +227,11 @@ local FILTER_BUFFS = {
 
 local FILTER_TEST = {
 		{ id = 48068, priority = 500 }, -- Renew
+		{ name = "Blood Presence", priority = 500 }, -- Blood Presence
 	};
 
 -- imports
-local AuraAlertFrame = kCore.AuraAlertFrame;
+local AuraAlertFrame = Internals.AuraAlertFrame;
 
 -- main
 

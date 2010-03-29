@@ -1,3 +1,5 @@
+local _, Internals = ...; 
+
 -- imports
 local UnitAuras = kCore.UnitAuras;
 local Frame = kWidgets.Frame;
@@ -118,7 +120,7 @@ local ctor = function( self, baseCtor, unit )
 end
 
 -- main
-kCore.AuraAlertFrame = kCore.CreateClass( ctor, { 
+Internals.AuraAlertFrame = kCore.CreateClass( ctor, { 
 		Update = Update,
 		AddFilter = AddFilter,
 		GetUnit = GetUnit
