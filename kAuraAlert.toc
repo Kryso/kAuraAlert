@@ -1,7 +1,7 @@
 ## Interface: 30300
 ## Title: kAuraAlert
 ## Author: Kryso 
-## Dependencies: kCore, kWidgets, kEvents, Tukui
+## Dependencies: kCore, Tukui
 ## OptionalDeps: Tukui_Heal_Layout
 
 AuraAlertFrame.lua

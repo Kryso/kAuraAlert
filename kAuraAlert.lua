@@ -270,7 +270,7 @@ snareFrame:SetParent( UIParent );
 snareFrame:SetPoint( "TOP", ccFrame, "BOTTOMLEFT", 0, -5 );
 
 -- focus
-local focusFrame = oUF_Tukz_focus;
+--[[local focusFrame = oUF_Tukz_focus;
 if ( focusFrame ) then
 	local ccFrame = AuraAlertFrame( "focus" );
 	ccFrame:AddFilter( FILTER_STUNS );
@@ -284,7 +284,7 @@ if ( focusFrame ) then
 	ccFrame:SetHeight( PARTY_SIZE );
 	ccFrame:SetParent( focusFrame );
 	ccFrame:SetPoint( "BOTTOM", focusFrame, "TOP", 0, 10 );
-end
+end]]
 
 -- arena frames
 for index = 1, 5 do
