@@ -99,7 +99,6 @@ local FILTER_STUNS = {
 		{ id = 50518, priority = STUN }, -- Ravage (Ravager)
 		-- Mage
 		{ id = 44572, priority = STUN + MAGIC }, -- Deep Freeze
-		{ id = 12355, priority = STUN }, -- Impact
 		-- Paladin
 		{ id = 853, priority = STUN + MAGIC }, -- Hammer of Justice
 		{ id = 2812, priority = STUN + MAGIC }, -- Holy Wrath
