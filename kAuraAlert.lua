@@ -3,7 +3,7 @@ local _, Internals = ...;
 -- defines
 local TESTMODE = false;
 
-local PLAYER_SIZE = 150;
+local PLAYER_SIZE = 120;
 local PARTY_SIZE = 59;
 
 local SNARE = 10;
@@ -226,6 +226,8 @@ local FILTER_BUFFS = {
 
 local FILTER_TEST = {
 		{ id = 48068, priority = 500 }, -- Renew
+		{ id = 17, priority = 500 }, -- Power Word: Shield
+		{ id = 21562, priority = 500 }, -- Power Word: Fortitude
 		{ name = "Blood Presence", priority = 500 }, -- Blood Presence
 	};
 
@@ -288,7 +290,7 @@ end]]
 -- arena frames
 for index = 1, 5 do
 	local unit = TESTMODE and "player" or ( "arena" .. tostring( index ) );
-	local parent = TESTMODE and UIParent or ( _G[ "oUF_Arena" .. tostring( index ) ] );
+	local parent = --[[TESTMODE and UIParent or]] ( _G[ "ElvUF_Arena" .. tostring( index ) ] );
 
 	if ( not parent ) then
 		break;
@@ -331,8 +333,13 @@ end
 
 -- party anchoring is handled runtime because party frames are created on demand
 local partyAuraFrames = { };
-for index = 0, 4 do
-	local unit = TESTMODE and "player" or ( index == 0 and "player" or "party" .. tostring( index ) );
+for index = 1, 5 do
+	local unit = TESTMODE and "player" or ( index == 1 and "player" or "party" .. tostring( index - 1 ) );
+	local parent = --[[TESTMODE and UIParent or]] ( _G[ "ElvUF_PartyGroup1UnitButton" .. tostring( index ) ] );
+
+	if ( not parent ) then
+		break;
+	end
 
 	local ccFrame = AuraAlertFrame( unit );
 	ccFrame:AddFilter( FILTER_STUNS );
@@ -343,6 +350,8 @@ for index = 0, 4 do
 	end
 	ccFrame:SetWidth( PARTY_SIZE );
 	ccFrame:SetHeight( PARTY_SIZE );
+	ccFrame:SetParent( parent );
+	ccFrame:SetPoint( "LEFT", parent, "RIGHT", 10, 0 );
 
 	local rootFrame = AuraAlertFrame( unit );
 	rootFrame:AddFilter( FILTER_ROOTS );
@@ -352,8 +361,8 @@ for index = 0, 4 do
 	end
 	rootFrame:SetWidth( PARTY_SIZE / 2 + 0.5 );
 	rootFrame:SetHeight( PARTY_SIZE / 2 + 0.5 );
+	rootFrame:SetParent( parent );
 	rootFrame:SetPoint( "TOPLEFT", ccFrame, "TOPRIGHT", -1, 0 );
-	ccFrame.rootFrame = rootFrame;
 
 	local snareFrame = AuraAlertFrame( unit );
 	snareFrame:AddFilter( FILTER_SNARES );
@@ -362,19 +371,18 @@ for index = 0, 4 do
 	end
 	snareFrame:SetWidth( PARTY_SIZE / 2 + 0.5 );
 	snareFrame:SetHeight( PARTY_SIZE / 2 + 0.5 );
+	snareFrame:SetParent( parent );
 	snareFrame:SetPoint( "BOTTOMLEFT", ccFrame, "BOTTOMRIGHT", -1, 0 );
-	ccFrame.snareFrame = snareFrame;
-
-	tinsert( partyAuraFrames, ccFrame );
 end
 
+--[[
 local OnPartyMembersChanged = function( self )
 	for _, frame in ipairs( partyAuraFrames ) do
 		local unit = frame:GetUnit();
 		local parent;
 
 		for index = 1, 5 do
-			parent = _G[ "oUF_GroupUnitButton" .. tostring( index ) ];
+			parent = _G[ "ElvUF_PartyGroup1UnitButton" .. tostring( index ) ];
 
 			if ( parent and parent:GetAttribute( "unit" ) == unit ) then
 				break;
@@ -391,3 +399,5 @@ local OnPartyMembersChanged = function( self )
 	end
 end
 kEvents.RegisterEvent( "PARTY_MEMBERS_CHANGED", OnPartyMembersChanged );
+OnPartyMembersChanged( nil );
+]]

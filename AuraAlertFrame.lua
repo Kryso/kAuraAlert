@@ -121,7 +121,7 @@ end
 
 -- main
 Internals.AuraAlertFrame = kCore.CreateClass( ctor, { 
-		Update = Update,
-		AddFilter = AddFilter,
-		GetUnit = GetUnit
-	}, Frame );
+	Update = Update,
+	AddFilter = AddFilter,
+	GetUnit = GetUnit
+}, Frame );
